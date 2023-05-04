@@ -89,13 +89,34 @@ observer.observe(document.body, { childList: true, subtree: true });
 
 const observer2 = new MutationObserver(() => {
   const composer = document.querySelector(".TextEditor-toolbar");
-  if (!composer) {
-      const emotesBox = document.querySelector(".floating-container");
+  const emotesBox = document.querySelector(".floating-container");
+  if (!composer && emotesBox) {
       emotesBox.remove();
       isEmotesBoxOpen = false;
-    };
-    composer.appendChild(button);
-  
+  };
 });
 
 observer2.observe(document.body, { childList: true, subtree: true });
+
+
+
+//css
+const style = document.createElement('style');
+style.innerHTML = `
+  .floating-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .floating-container::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  .floating-container::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+
+  .floating-container::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+`;
+document.head.appendChild(style);
