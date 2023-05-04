@@ -38,7 +38,7 @@ function toggleEmotesBox(button) {
     composerContent.appendChild(emotesBox);
 
     isEmotesBoxOpen = true;
-    
+
     const emotesList = document.createElement("div");
     emotesList.id = "emotes-list";
     emotesList.style.display = "flex";
@@ -53,13 +53,23 @@ function toggleEmotesBox(button) {
         data.forEach((emote) => {
           emote_id = emote['id'];
           emote_name = emote['name'];
+
+          const emoteContainer = document.createElement("div");
+          emoteContainer.style.height = "85px";
+          emoteContainer.style.display = "inline-block";
+          emoteContainer.style.maxWidth = "85px";
+          emoteContainer.style.display = "flex";
+          emoteContainer.style.alignItems = "center"; 
+
           const emoteImg = document.createElement("img");
           emoteImg.src = `https://cdn.7tv.app/emote/${emote_id}/4x.webp`;
           emoteImg.alt = emote_id;
           emoteImg.title = emote_name;
-          emoteImg.style.height = "85px";
-          emotesList.appendChild(emoteImg);
-          emoteImg.onclick = function() {
+          emoteImg.style.maxWidth = "100%";
+          emoteContainer.appendChild(emoteImg);   
+          emotesList.appendChild(emoteContainer);
+
+          emoteImg.onclick = function () {
             const textarea = document.querySelector('.TextEditor-editor');
             const altText = this.getAttribute('alt');
             textarea.value = textarea.value + "![](https://cdn.7tv.app/emote/" + altText + "/4x.webp)\n";
@@ -91,8 +101,8 @@ const observer2 = new MutationObserver(() => {
   const composer = document.querySelector(".TextEditor-toolbar");
   const emotesBox = document.querySelector(".floating-container");
   if (!composer && emotesBox) {
-      emotesBox.remove();
-      isEmotesBoxOpen = false;
+    emotesBox.remove();
+    isEmotesBoxOpen = false;
   };
 });
 
