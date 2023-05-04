@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Kater em",
+    "version": "1.0",
+    "description": "7tv emotes in Kater",
+    "author": "HomeSweetHome",
+    "icons": {
+        "16": "image16.png",
+        "48": "image48.png",
+        "128": "image128.png"
+    },
+    "content_scripts": [
+        {
+          "matches": ["https://kater.me/*"],
+          "js": ["content_scripts.js"]
+        }
+    ]
+}
