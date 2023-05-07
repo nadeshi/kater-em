@@ -12,7 +12,7 @@ function loadPosts() {
   }
 }
 
-//7tv emotes
+//extra emotes for kater
 
 let isEmotesBoxOpen = false;
 
@@ -24,13 +24,6 @@ function toggleEmotesBox(button) {
   } else {
     const emotesBox = document.createElement("div");
     emotesBox.className = "floating-container";
-    emotesBox.style.width = "300px";
-    emotesBox.style.height = "400px";
-    emotesBox.style.backgroundColor = "black";
-    emotesBox.style.position = "fixed";
-    emotesBox.style.zIndex = "9999";
-    emotesBox.style.bottom = "0px";
-    emotesBox.style.overflow = "auto";
 
     const composerContent = document.querySelector(".Composer-content");
     const composerRect = composerContent.getBoundingClientRect();
@@ -40,10 +33,7 @@ function toggleEmotesBox(button) {
     isEmotesBoxOpen = true;
 
     const emotesList = document.createElement("div");
-    emotesList.id = "emotes-list";
-    emotesList.style.display = "flex";
-    emotesList.style.flexWrap = "wrap";
-    emotesList.style.justifyContent = "space-between";
+    emotesList.className = "emotes-list";
     emotesBox.appendChild(emotesList);
 
     fetch(`https://api.7tv.app/v3/emote-sets/64538f7035d9c537ccd2d78f`)
@@ -55,11 +45,7 @@ function toggleEmotesBox(button) {
           emote_name = emote['name'];
 
           const emoteContainer = document.createElement("div");
-          emoteContainer.style.height = "85px";
-          emoteContainer.style.display = "inline-block";
-          emoteContainer.style.maxWidth = "85px";
-          emoteContainer.style.display = "flex";
-          emoteContainer.style.alignItems = "center";
+          emoteContainer.className = "emote-container";
 
           const emoteImg = document.createElement("img");
           emoteImg.src = `https://cdn.7tv.app/emote/${emote_id}/4x.webp`;
@@ -108,6 +94,42 @@ observer.observe(document.body, { childList: true, subtree: true });
 //css
 const style = document.createElement('style');
 style.innerHTML = `
+  .floating-container {
+    width: 300px;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 9999;
+    bottom: 0px;
+    overflow: auto;
+  }
+
+  .emote-container {
+    height: 85px;
+    display: inline-block;
+    max-width: 85px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+    border: 2px solid rgba(255, 255, 255, 0.5); 
+    margin: 5px;
+  }
+
+  .emote-container:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.8); 
+  }
+
+  .emotes-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
   .floating-container::-webkit-scrollbar {
     width: 8px;
   }
