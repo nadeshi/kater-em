@@ -85,6 +85,13 @@ const observer = new MutationObserver(() => {
     emotesBox.remove();
     isEmotesBoxOpen = false;
   };
+
+  //show point
+  const cardInfo = document.querySelector(".UserCard-info .item-points");
+  if (cardInfo) {
+    cardInfo.style.display = "block";
+  }
+
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
